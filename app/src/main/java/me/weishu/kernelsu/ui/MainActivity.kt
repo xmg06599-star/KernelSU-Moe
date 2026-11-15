@@ -245,7 +245,7 @@ class MainActivity : ComponentActivity() {
 
                     when (uiMode) {
                         UiMode.Material -> androidx.compose.material3.Scaffold(
-                            containerColor = MaterialTheme.colorScheme.surfaceContainer
+                            containerColor = androidx.compose.ui.graphics.Color.Transparent
                         ) { navDisplay() }
 
                         UiMode.Miuix -> Scaffold { navDisplay() }
@@ -416,7 +416,7 @@ fun MainScreen(
 
             when (uiMode) {
                 UiMode.Material -> androidx.compose.material3.Scaffold(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainer
+                    containerColor = androidx.compose.ui.graphics.Color.Transparent
                 ) {
                     Row {
                         SideRail(navigationBadge)
@@ -460,7 +460,7 @@ fun MainScreen(
             when (uiMode) {
                 UiMode.Material -> androidx.compose.material3.Scaffold(
                     bottomBar = bottomBar,
-                    containerColor = MaterialTheme.colorScheme.surfaceContainer
+                    containerColor = androidx.compose.ui.graphics.Color.Transparent
                 ) { innerPadding ->
                     pagerContent(innerPadding.calculateBottomPadding())
                 }
