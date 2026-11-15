@@ -1,6 +1,8 @@
 package me.weishu.kernelsu.ui.component.material
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.WindowInsets
@@ -47,7 +49,22 @@ fun ExpressiveScaffold(
         CompositionLocalProvider(LocalMoeBackdrop provides moeBackdrop) {
             Scaffold(
             modifier = modifier,
-            topBar = topBar,
+            topBar = {
+                Box {
+                    topBar()
+                    Box(
+                        modifier = Modifier
+                            .matchParentSize()
+                            .background(
+                                Brush.verticalGradient(
+                                    0.0f to MaterialTheme.colorScheme.surface.copy(alpha = 0.58f),
+                                    0.65f to MaterialTheme.colorScheme.surface.copy(alpha = 0.30f),
+                                    1.0f to Color.Transparent
+                                )
+                            )
+                    )
+                }
+            },
             bottomBar = bottomBar,
             snackbarHost = snackbarHost,
             floatingActionButton = floatingActionButton,
@@ -63,7 +80,7 @@ fun ExpressiveScaffold(
 
 @Composable
 fun expressiveTopAppBarColors(
-    containerColor: Color = MaterialTheme.colorScheme.surface.copy(alpha = 0.38f),
+    containerColor: Color = Color.Transparent,
     scrolledContainerColor: Color = containerColor,
 ): TopAppBarColors = TopAppBarDefaults.topAppBarColors(
     containerColor = containerColor,
