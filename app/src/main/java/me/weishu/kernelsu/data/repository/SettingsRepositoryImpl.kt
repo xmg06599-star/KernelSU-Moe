@@ -94,6 +94,10 @@ class SettingsRepositoryImpl : SettingsRepository {
         get() = prefs.getString("moe_subtitle", "") ?: ""
         set(value) = prefs.edit { putString("moe_subtitle", value) }
 
+    override var moeHeroTitle: String
+        get() = prefs.getString("moe_hero_title", "") ?: ""
+        set(value) = prefs.edit { putString("moe_hero_title", value) }
+
     override var colorStyle: String
         get() = prefs.getString("color_style", PaletteStyle.TonalSpot.name) ?: PaletteStyle.TonalSpot.name
         set(value) = prefs.edit { putString("color_style", value) }

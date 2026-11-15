@@ -57,6 +57,10 @@ object MoeHeroStore {
     var subtitle by mutableStateOf("")
         private set
 
+    /** Hero 卡专属标题（空 = 跟随顶部台词） */
+    var heroTitle by mutableStateOf("")
+        private set
+
     fun refresh() {
         val repo = SettingsRepositoryImpl()
         path = repo.moeHeroPath
@@ -67,6 +71,7 @@ object MoeHeroStore {
         bgBlur = repo.moeBgBlur
         title = repo.moeTitle
         subtitle = repo.moeSubtitle
+        heroTitle = repo.moeHeroTitle
     }
 
     fun updateAppearance(
@@ -75,6 +80,7 @@ object MoeHeroStore {
         cardAlpha: Float,
         bgBlur: Float,
         barAlpha: Float,
+        heroTitle: String = "",
     ) {
         val repo = SettingsRepositoryImpl()
         repo.moeTitle = title
@@ -82,11 +88,13 @@ object MoeHeroStore {
         repo.moeCardAlpha = cardAlpha
         repo.moeBgBlur = bgBlur
         repo.moeBarAlpha = barAlpha
+        repo.moeHeroTitle = heroTitle
         this.title = title
         this.subtitle = subtitle
         this.cardAlpha = cardAlpha
         this.bgBlur = bgBlur
         this.barAlpha = barAlpha
+        this.heroTitle = heroTitle
     }
 
     fun updateLayout(value: Int) {

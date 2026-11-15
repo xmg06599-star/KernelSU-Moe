@@ -101,7 +101,7 @@ fun HomePagerMaterial(
             verticalArrangement = Arrangement.spacedBy(13.dp)
         ) {
             MoeHeroCard(
-                title = moeTitleFor(state),
+                title = MoeHeroStore.heroTitle.ifEmpty { moeTitleFor(state) },
                 subtitle = MoeHeroStore.subtitle.ifEmpty { stringResource(R.string.moe_hero_caption) },
                 tags = listOfNotNull(
                     if (state.lkmMode == true) "LKM" else "GKI",

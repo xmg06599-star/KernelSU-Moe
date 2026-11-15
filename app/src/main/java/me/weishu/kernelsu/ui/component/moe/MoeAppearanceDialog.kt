@@ -32,6 +32,7 @@ fun MoeAppearanceDialog(
 
     var title by remember { mutableStateOf(MoeHeroStore.title) }
     var subtitle by remember { mutableStateOf(MoeHeroStore.subtitle) }
+    var heroTitle by remember { mutableStateOf(MoeHeroStore.heroTitle) }
     var cardAlpha by remember { mutableFloatStateOf(MoeHeroStore.cardAlpha) }
     var bgBlur by remember { mutableFloatStateOf(MoeHeroStore.bgBlur) }
     var barAlpha by remember { mutableFloatStateOf(MoeHeroStore.barAlpha) }
@@ -51,6 +52,19 @@ fun MoeAppearanceDialog(
                     onValueChange = { title = it },
                     singleLine = true,
                     placeholder = { Text("哼，KernelSU 才不是给你玩的") },
+                    modifier = Modifier.fillMaxWidth()
+                )
+                Text(
+                    "Hero 卡标题（留空则跟随顶部台词）",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(top = 4.dp)
+                )
+                OutlinedTextField(
+                    value = heroTitle,
+                    onValueChange = { heroTitle = it },
+                    singleLine = true,
+                    placeholder = { Text("和顶部那句不一样也可以") },
                     modifier = Modifier.fillMaxWidth()
                 )
                 OutlinedTextField(
@@ -104,6 +118,7 @@ fun MoeAppearanceDialog(
                     cardAlpha = cardAlpha,
                     bgBlur = bgBlur,
                     barAlpha = barAlpha,
+                    heroTitle = heroTitle.trim(),
                 )
                 onDismiss()
             }) { Text("好了") }

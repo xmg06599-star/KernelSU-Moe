@@ -56,6 +56,9 @@ interface SettingsRepository {
     /** 自定义主页副标题，空串 = 用默认 */
     var moeSubtitle: String
 
+    /** Hero 卡专属标题，空串 = 跟随顶部台词 */
+    var moeHeroTitle: String
+
     suspend fun getSuCompatStatus(): String
     suspend fun getSuCompatPersistValue(): Long?
     fun isSuEnabled(): Boolean
