@@ -34,6 +34,10 @@ import androidx.compose.material3.SegmentedListItem
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import top.yukonga.miuix.kmp.blur.textureBlur
+import top.yukonga.miuix.kmp.blur.BlurColors
+import top.yukonga.miuix.kmp.blur.BlendColorEntry
+import androidx.compose.ui.graphics.Color
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
@@ -273,9 +277,24 @@ fun SegmentedItemContainer(
     content: @Composable () -> Unit,
 ) {
     val shapes = LocalListItemShapes.current ?: ListItemDefaults.segmentedShapes(0, 1)
+    val moeBackdrop = LocalMoeBackdrop.current
+    val glassModifier = if (moeBackdrop != null) {
+        Modifier.textureBlur(
+            backdrop = moeBackdrop,
+            shape = shapes.shape,
+            blurRadius = 30f,
+            colors = BlurColors(
+                blendColors = listOf(
+                    BlendColorEntry(color = colorScheme.surface.copy(alpha = 0.62f)),
+                ),
+            ),
+        )
+    } else {
+        Modifier
+    }
     Surface(
-        modifier = modifier.fillMaxWidth(),
-        color = colorScheme.surfaceBright.copy(alpha = 0.90f),
+        modifier = modifier.fillMaxWidth().then(glassModifier),
+        color = if (moeBackdrop != null) Color.Transparent else colorScheme.surfaceBright,
         contentColor = colorScheme.onSurface,
         shape = shapes.shape,
     ) {
