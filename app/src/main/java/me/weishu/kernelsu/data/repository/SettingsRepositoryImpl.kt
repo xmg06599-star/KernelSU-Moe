@@ -78,6 +78,10 @@ class SettingsRepositoryImpl : SettingsRepository {
         get() = prefs.getFloat("moe_card_alpha", 0.55f)
         set(value) = prefs.edit { putFloat("moe_card_alpha", value) }
 
+    override var moeBarAlpha: Float
+        get() = prefs.getFloat("moe_bar_alpha", 0.96f)
+        set(value) = prefs.edit { putFloat("moe_bar_alpha", value) }
+
     override var moeBgBlur: Float
         get() = prefs.getFloat("moe_bg_blur", 14f)
         set(value) = prefs.edit { putFloat("moe_bg_blur", value) }

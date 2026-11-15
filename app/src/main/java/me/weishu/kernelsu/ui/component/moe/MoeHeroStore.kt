@@ -45,6 +45,10 @@ object MoeHeroStore {
     var bgBlur by mutableStateOf(14f)
         private set
 
+    /** 底栏不透明度 */
+    var barAlpha by mutableStateOf(0.96f)
+        private set
+
     /** 自定义主页标题（空 = 默认台词） */
     var title by mutableStateOf("")
         private set
@@ -59,21 +63,30 @@ object MoeHeroStore {
         bgPath = repo.moeBgPath
         layout = repo.moeHeroLayout
         cardAlpha = repo.moeCardAlpha
+        barAlpha = repo.moeBarAlpha
         bgBlur = repo.moeBgBlur
         title = repo.moeTitle
         subtitle = repo.moeSubtitle
     }
 
-    fun updateAppearance(title: String, subtitle: String, cardAlpha: Float, bgBlur: Float) {
+    fun updateAppearance(
+        title: String,
+        subtitle: String,
+        cardAlpha: Float,
+        bgBlur: Float,
+        barAlpha: Float,
+    ) {
         val repo = SettingsRepositoryImpl()
         repo.moeTitle = title
         repo.moeSubtitle = subtitle
         repo.moeCardAlpha = cardAlpha
         repo.moeBgBlur = bgBlur
+        repo.moeBarAlpha = barAlpha
         this.title = title
         this.subtitle = subtitle
         this.cardAlpha = cardAlpha
         this.bgBlur = bgBlur
+        this.barAlpha = barAlpha
     }
 
     fun updateLayout(value: Int) {

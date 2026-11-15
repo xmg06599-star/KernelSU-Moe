@@ -44,6 +44,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import me.weishu.kernelsu.Natives
 import me.weishu.kernelsu.R
 import me.weishu.kernelsu.ui.LocalMainPagerState
+import me.weishu.kernelsu.ui.component.moe.MoeHeroStore
 import me.weishu.kernelsu.ui.util.ksuUiUnlocked
 
 @Composable
@@ -67,7 +68,7 @@ fun BottomBarMaterial(navigationBadge: NavigationBadgeState, backdrop: Backdrop)
             .padding(start = 20.dp, end = 20.dp, bottom = navBottomInset + 10.dp)
             .shadow(12.dp, barShape, clip = false)
             .clip(barShape)
-            .background(MaterialTheme.colorScheme.surfaceContainer)
+            .background(MaterialTheme.colorScheme.surfaceContainer.copy(alpha = MoeHeroStore.barAlpha))
     ) {
         ShortNavigationBar(
             containerColor = Color.Transparent,

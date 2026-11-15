@@ -47,6 +47,9 @@ interface SettingsRepository {
     /** 背景模糊半径（dp） */
     var moeBgBlur: Float
 
+    /** 底部导航栏不透明度 0.5~1.0 */
+    var moeBarAlpha: Float
+
     /** 自定义主页台词，空串 = 用默认台词 */
     var moeTitle: String
 

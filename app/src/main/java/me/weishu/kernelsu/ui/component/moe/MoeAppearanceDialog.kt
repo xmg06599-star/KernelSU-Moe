@@ -34,6 +34,7 @@ fun MoeAppearanceDialog(
     var subtitle by remember { mutableStateOf(MoeHeroStore.subtitle) }
     var cardAlpha by remember { mutableFloatStateOf(MoeHeroStore.cardAlpha) }
     var bgBlur by remember { mutableFloatStateOf(MoeHeroStore.bgBlur) }
+    var barAlpha by remember { mutableFloatStateOf(MoeHeroStore.barAlpha) }
 
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -82,6 +83,17 @@ fun MoeAppearanceDialog(
                     onValueChange = { bgBlur = it },
                     valueRange = 0f..40f
                 )
+
+                Text(
+                    "底栏不透明度 ${(barAlpha * 100).toInt()}%（低于 85% 会透出下面的内容）",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Slider(
+                    value = barAlpha,
+                    onValueChange = { barAlpha = it },
+                    valueRange = 0.50f..1.0f
+                )
             }
         },
         confirmButton = {
@@ -91,6 +103,7 @@ fun MoeAppearanceDialog(
                     subtitle = subtitle.trim(),
                     cardAlpha = cardAlpha,
                     bgBlur = bgBlur,
+                    barAlpha = barAlpha,
                 )
                 onDismiss()
             }) { Text("好了") }
