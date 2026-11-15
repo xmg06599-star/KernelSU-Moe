@@ -65,7 +65,7 @@ fun BottomBarMiuix(
         BlurredBar(blurBackdrop) {
             NavigationBar(
                 modifier = modifier,
-                color = if (blurBackdrop != null) Color.Transparent else MiuixTheme.colorScheme.surface,
+                color = if (blurBackdrop != null) Color.Transparent else MiuixTheme.colorScheme.surface.copy(alpha = 0.88f),
                 content = {
                     items.forEachIndexed { index, item ->
                         NavigationBarItem(

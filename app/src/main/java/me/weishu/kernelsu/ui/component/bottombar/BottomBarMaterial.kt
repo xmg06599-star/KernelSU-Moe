@@ -46,7 +46,7 @@ fun BottomBarMaterial(navigationBadge: NavigationBadgeState) {
     )
 
     ShortNavigationBar(
-        containerColor = MaterialTheme.colorScheme.surfaceContainer,
+        containerColor = MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.88f),
         windowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout).only(
             WindowInsetsSides.Horizontal + WindowInsetsSides.Bottom
         )

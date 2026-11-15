@@ -275,7 +275,8 @@ fun SegmentedItemContainer(
     val shapes = LocalListItemShapes.current ?: ListItemDefaults.segmentedShapes(0, 1)
     Surface(
         modifier = modifier.fillMaxWidth(),
-        color = colorScheme.surfaceBright,
+        color = colorScheme.surfaceBright.copy(alpha = 0.84f),
+        contentColor = colorScheme.onSurface,
         shape = shapes.shape,
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
