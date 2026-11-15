@@ -67,17 +67,7 @@ fun BottomBarMaterial(navigationBadge: NavigationBadgeState, backdrop: Backdrop)
             .padding(start = 20.dp, end = 20.dp, bottom = navBottomInset + 10.dp)
             .shadow(12.dp, barShape, clip = false)
             .clip(barShape)
-            .textureBlur(
-                backdrop = backdrop,
-                shape = barShape,
-                blurRadius = 30f,
-                colors = BlurColors(
-                    blendColors = listOf(
-                        BlendColorEntry(color = MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.80f)),
-                    ),
-                ),
-            )
-            .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.10f))
+            .background(MaterialTheme.colorScheme.surfaceContainer)
     ) {
         ShortNavigationBar(
             containerColor = Color.Transparent,
