@@ -1,6 +1,15 @@
 package me.weishu.kernelsu.ui.component.bottombar
 
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.clip
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.only
@@ -45,12 +54,17 @@ fun BottomBarMaterial(navigationBadge: NavigationBadgeState) {
         Triple(R.string.settings, Icons.Filled.Settings, Icons.Outlined.Settings)
     )
 
-    ShortNavigationBar(
-        containerColor = MaterialTheme.colorScheme.surfaceContainer,
-        windowInsets = WindowInsets.systemBars.union(WindowInsets.displayCutout).only(
-            WindowInsetsSides.Horizontal + WindowInsetsSides.Bottom
-        )
+    val navBottomInset = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+    Box(
+        modifier = Modifier
+            .padding(start = 20.dp, end = 20.dp, bottom = navBottomInset + 10.dp)
+            .clip(RoundedCornerShape(28.dp))
+            .background(MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.82f))
     ) {
+        ShortNavigationBar(
+            containerColor = Color.Transparent,
+            windowInsets = WindowInsets(0, 0, 0, 0)
+        ) {
         items.forEachIndexed { index, (label, selectedIcon, unselectedIcon) ->
             val selected = mainPagerState.selectedPage == index
             ShortNavigationBarItem(
@@ -76,6 +90,7 @@ fun BottomBarMaterial(navigationBadge: NavigationBadgeState) {
                 }
             )
         }
+    }
     }
 }
 
