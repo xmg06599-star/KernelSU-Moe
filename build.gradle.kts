@@ -26,8 +26,9 @@ fun getGitDescribe(): String {
 }
 
 fun getVersionCode(): Int {
-    val commitCount = getGitCommitCount()
-    return 30000 + commitCount
+    // 对齐官方最新 release 的 versionCode，避免管理器一直提示「有新版本」。
+    // 想再叠自己的版本号就在这个基数上加。
+    return 32680
 }
 
 fun getVersionName(): String {

@@ -128,7 +128,9 @@ fun HomePagerMaterial(
             if (state.showGkiWarning) {
                 WarningCard(stringResource(id = R.string.home_gki_warning), level = WarningLevel.Notice)
             }
-            if (state.requiresNewKernel) {
+            // 第三方内核（SukiSU 等）的 UAPI 号与官方管理器对不上是常态，
+            // 这条「内核该更新了」在它们上面是误报，且点了会走刷写流程，有风险，所以不显示。
+            if (false && state.requiresNewKernel) {
                 WarningCard(
                     stringResource(
                         id = if (state.canInstallKernelUpdate) R.string.require_kernel_version else R.string.require_kernel_version_gki
