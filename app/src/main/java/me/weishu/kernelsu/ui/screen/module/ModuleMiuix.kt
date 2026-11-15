@@ -527,7 +527,7 @@ fun ModulePagerMiuix(
                         refreshTick.intValue,
                         isBusy = { latestRefreshing.value },
                     ) { latestModules.value }
-                    Box(modifier = if (backdrop != null) Modifier.layerBackdrop(backdrop) else Modifier) {
+                    MoePageBackground(modifier = if (backdrop != null) Modifier.layerBackdrop(backdrop) else Modifier) {
                         ModuleList(
                             modifier = Modifier
                                 .fillMaxHeight()

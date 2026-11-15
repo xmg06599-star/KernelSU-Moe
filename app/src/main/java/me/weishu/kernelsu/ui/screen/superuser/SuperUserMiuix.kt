@@ -434,7 +434,7 @@ fun SuperUserPagerMiuix(
                     end = innerPadding.calculateEndPadding(layoutDirection)
                 ),
             ) {
-                Box(modifier = if (backdrop != null) Modifier.layerBackdrop(backdrop) else Modifier) {
+                MoePageBackground(modifier = if (backdrop != null) Modifier.layerBackdrop(backdrop) else Modifier) {
                     LazyColumn(
                         state = lazyListState,
                         modifier = Modifier

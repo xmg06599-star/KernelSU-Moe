@@ -30,6 +30,7 @@ import androidx.compose.material.icons.filled.Security
 import androidx.compose.material.icons.filled.SystemUpdate
 import androidx.compose.material.icons.filled.SystemUpdateAlt
 import androidx.compose.material.icons.filled.VerifiedUser
+import androidx.compose.material.icons.filled.Wallpaper
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LargeFlexibleTopAppBar
 import androidx.compose.material3.SnackbarHostState
@@ -92,8 +93,17 @@ fun SettingPagerMaterial(
             }
         }
     }
+    val moeBgPicker = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        if (uri != null) {
+            scope.launch {
+                MoeHeroStore.importBackground(context, uri)
+                MoeHeroStore.refresh()
+            }
+        }
+    }
     val moeHeroReady = MoeHeroStore.path.isNotEmpty()
     val moeHeroLayout = MoeHeroStore.layout
+    val moeBgReady = MoeHeroStore.bgPath.isNotEmpty()
 
     UninstallDialog(
         show = showUninstallDialog.value,
@@ -214,6 +224,38 @@ fun SettingPagerMaterial(
                                 ),
                                 selectedIndex = moeHeroLayout,
                                 onItemSelected = { MoeHeroStore.updateLayout(it) }
+                            )
+                        }
+                    }
+                    add {
+                        SegmentedListItem(
+                            onClick = { moeBgPicker.launch("image/*") },
+                            headlineContent = { Text(stringResource(id = R.string.moe_bg_title)) },
+                            supportingContent = {
+                                Text(
+                                    if (moeBgReady) {
+                                        stringResource(id = R.string.moe_bg_summary_set)
+                                    } else {
+                                        stringResource(id = R.string.moe_bg_summary_none)
+                                    }
+                                )
+                            },
+                            leadingContent = { Icon(Icons.Filled.Wallpaper, stringResource(id = R.string.moe_bg_title)) },
+                            trailingContent = {
+                                Icon(
+                                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                                    null
+                                )
+                            }
+                        )
+                    }
+                    if (moeBgReady) {
+                        add {
+                            SegmentedListItem(
+                                onClick = { MoeHeroStore.clearBackground() },
+                                headlineContent = { Text(stringResource(id = R.string.moe_bg_reset)) },
+                                supportingContent = { Text(stringResource(id = R.string.moe_bg_reset_summary)) },
+                                leadingContent = { Icon(Icons.Filled.RestartAlt, stringResource(id = R.string.moe_bg_reset)) }
                             )
                         }
                     }

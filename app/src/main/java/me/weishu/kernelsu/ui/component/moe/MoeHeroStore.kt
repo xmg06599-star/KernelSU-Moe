@@ -19,23 +19,28 @@ import java.io.File
 import java.io.FileOutputStream
 
 /**
- * 首页立绘的存储中心。
+ * 首页立绘 + 全App背景图的存储中心。
  *
- * 图片不打包进 APK，而是用户第一次在「设置 → 主页立绘」里挑一张，
+ * 图片都不打包进 APK，而是用户自己在「设置 → 主题设置」里导入，
  * 缩放到最长边 1440 后存进应用私有目录，路径记在 SettingsRepository 里。
  */
 object MoeHeroStore {
-    /** 当前立绘的绝对路径；空串表示没设置（回落到纯渐变 + 樱花装饰）。 */
+    /** 首页 Hero 卡立绘；空串表示没设置（回落到纯渐变 + 樱花装饰）。 */
     var path by mutableStateOf("")
         private set
 
-    /** 0 = 侧图，1 = 满铺 */
+    /** 全 App 页面背景图；空串表示没设置。 */
+    var bgPath by mutableStateOf("")
+        private set
+
+    /** Hero 卡排版：0 = 侧图，1 = 满铺 */
     var layout by mutableStateOf(0)
         private set
 
     fun refresh() {
         val repo = SettingsRepositoryImpl()
         path = repo.moeHeroPath
+        bgPath = repo.moeBgPath
         layout = repo.moeHeroLayout
     }
 
@@ -49,15 +54,31 @@ object MoeHeroStore {
         path = ""
     }
 
-    /**
-     * 把 [uri] 指向的图片压到最长边 1440，存为 files/moe/hero.png。
-     * @return 是否成功
-     */
+    fun clearBackground() {
+        SettingsRepositoryImpl().moeBgPath = ""
+        bgPath = ""
+    }
+
     suspend fun importImage(context: Context, uri: Uri): Boolean = withContext(Dispatchers.IO) {
-        try {
+        saveImage(context, uri, "hero.png")?.let { file ->
+            SettingsRepositoryImpl().moeHeroPath = file
+            true
+        } ?: false
+    }
+
+    suspend fun importBackground(context: Context, uri: Uri): Boolean = withContext(Dispatchers.IO) {
+        saveImage(context, uri, "bg.png")?.let { file ->
+            SettingsRepositoryImpl().moeBgPath = file
+            true
+        } ?: false
+    }
+
+    /** 解码 + 缩放到最长边 1440 + 存成 PNG，返回绝对路径；失败返回 null。 */
+    private fun saveImage(context: Context, uri: Uri, fileName: String): String? {
+        return try {
             val decoded = context.contentResolver.openInputStream(uri)?.use { stream ->
                 BitmapFactory.decodeStream(stream)
-            } ?: return@withContext false
+            } ?: return null
 
             val longest = maxOf(decoded.width, decoded.height)
             val scaled = if (longest > 1440) {
@@ -70,21 +91,19 @@ object MoeHeroStore {
             }
 
             val dir = File(context.filesDir, "moe").apply { mkdirs() }
-            val target = File(dir, "hero.png")
+            val target = File(dir, fileName)
             FileOutputStream(target).use { out ->
                 scaled.compress(Bitmap.CompressFormat.PNG, 100, out)
             }
             scaled.recycle()
-
-            SettingsRepositoryImpl().moeHeroPath = target.absolutePath
-            true
+            target.absolutePath
         } catch (_: Throwable) {
-            false
+            null
         }
     }
 }
 
-/** 读 [MoeHeroStore.path] 对应的图片，路径变了会自动重新加载。 */
+/** 读 [MoeHeroStore.path] 对应的立绘，路径变了会自动重新加载。 */
 @Composable
 fun rememberMoeHeroPainter(): Painter? {
     val path = MoeHeroStore.path

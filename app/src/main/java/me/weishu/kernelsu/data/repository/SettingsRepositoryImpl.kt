@@ -70,6 +70,10 @@ class SettingsRepositoryImpl : SettingsRepository {
         get() = prefs.getInt("moe_hero_layout", 0)
         set(value) = prefs.edit { putInt("moe_hero_layout", value) }
 
+    override var moeBgPath: String
+        get() = prefs.getString("moe_bg_path", "") ?: ""
+        set(value) = prefs.edit { putString("moe_bg_path", value) }
+
     override var colorStyle: String
         get() = prefs.getString("color_style", PaletteStyle.TonalSpot.name) ?: PaletteStyle.TonalSpot.name
         set(value) = prefs.edit { putString("color_style", value) }

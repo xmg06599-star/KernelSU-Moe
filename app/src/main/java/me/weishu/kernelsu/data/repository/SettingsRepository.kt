@@ -38,6 +38,9 @@ interface SettingsRepository {
     /** 首页 Hero 卡立绘的排法：0 = 侧图，1 = 满铺。 */
     var moeHeroLayout: Int
 
+    /** 全 App 背景图的绝对路径，空串表示未设置。 */
+    var moeBgPath: String
+
     suspend fun getSuCompatStatus(): String
     suspend fun getSuCompatPersistValue(): Long?
     fun isSuEnabled(): Boolean

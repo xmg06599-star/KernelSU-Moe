@@ -350,4 +350,9 @@
     <string name="moe_layout_summary_full">满铺：图铺满整张卡，海报感</string>
     <string name="moe_layout_side">侧图</string>
     <string name="moe_layout_full">满铺</string>
+    <string name="moe_bg_title">背景图</string>
+    <string name="moe_bg_summary_none">给整个界面铺一张背景图（建议竖图）</string>
+    <string name="moe_bg_summary_set">已经铺好啦，点一下换一张</string>
+    <string name="moe_bg_reset">恢复默认背景</string>
+    <string name="moe_bg_reset_summary">回到纯色背景</string>
 </resources>

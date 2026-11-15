@@ -62,6 +62,7 @@ import me.weishu.kernelsu.ui.component.dialog.rememberConfirmDialog
 import me.weishu.kernelsu.ui.component.miuix.WarningCard
 import androidx.compose.runtime.LaunchedEffect
 import me.weishu.kernelsu.ui.component.moe.MoeHeroCard
+import me.weishu.kernelsu.ui.component.moe.MoePageBackground
 import me.weishu.kernelsu.ui.component.moe.MoeHeroLayout
 import me.weishu.kernelsu.ui.component.moe.MoeHeroStore
 import me.weishu.kernelsu.ui.component.moe.rememberMoeHeroPainter
@@ -118,7 +119,7 @@ fun HomePagerMiuix(
         popupHost = { },
         contentWindowInsets = WindowInsets.systemBars.add(WindowInsets.displayCutout).only(WindowInsetsSides.Horizontal)
     ) { innerPadding ->
-        Box(modifier = if (backdrop != null) Modifier.layerBackdrop(backdrop) else Modifier) {
+        MoePageBackground(modifier = if (backdrop != null) Modifier.layerBackdrop(backdrop) else Modifier) {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxHeight()

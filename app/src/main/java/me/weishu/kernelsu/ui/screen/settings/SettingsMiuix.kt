@@ -35,6 +35,7 @@ import androidx.compose.material.icons.rounded.VerifiedUser
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material.icons.rounded.Image
+import androidx.compose.material.icons.rounded.Wallpaper
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
@@ -98,6 +99,14 @@ fun SettingPagerMiuix(
             }
         }
     }
+    val moeBgPicker = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        if (uri != null) {
+            scope.launch {
+                MoeHeroStore.importBackground(context, uri)
+                MoeHeroStore.refresh()
+            }
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -112,7 +121,7 @@ fun SettingPagerMiuix(
         popupHost = { },
         contentWindowInsets = WindowInsets.systemBars.add(WindowInsets.displayCutout).only(WindowInsetsSides.Horizontal),
     ) { innerPadding ->
-        Box(modifier = if (backdrop != null) Modifier.layerBackdrop(backdrop) else Modifier) {
+        MoePageBackground(modifier = if (backdrop != null) Modifier.layerBackdrop(backdrop) else Modifier) {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxHeight()
@@ -224,6 +233,38 @@ fun SettingPagerMiuix(
                                     )
                                 },
                                 onClick = { MoeHeroStore.clear() }
+                            )
+                        }
+                        ArrowPreference(
+                            title = stringResource(id = R.string.moe_bg_title),
+                            summary = if (MoeHeroStore.bgPath.isEmpty()) {
+                                stringResource(id = R.string.moe_bg_summary_none)
+                            } else {
+                                stringResource(id = R.string.moe_bg_summary_set)
+                            },
+                            startAction = {
+                                Icon(
+                                    Icons.Rounded.Wallpaper,
+                                    modifier = Modifier.padding(end = 6.dp),
+                                    contentDescription = stringResource(id = R.string.moe_bg_title),
+                                    tint = colorScheme.onBackground
+                                )
+                            },
+                            onClick = { moeBgPicker.launch("image/*") }
+                        )
+                        if (MoeHeroStore.bgPath.isNotEmpty()) {
+                            ArrowPreference(
+                                title = stringResource(id = R.string.moe_bg_reset),
+                                summary = stringResource(id = R.string.moe_bg_reset_summary),
+                                startAction = {
+                                    Icon(
+                                        Icons.Rounded.RestartAlt,
+                                        modifier = Modifier.padding(end = 6.dp),
+                                        contentDescription = stringResource(id = R.string.moe_bg_reset),
+                                        tint = colorScheme.onBackground
+                                    )
+                                },
+                                onClick = { MoeHeroStore.clearBackground() }
                             )
                         }
                         if (MoeHeroStore.path.isNotEmpty()) {

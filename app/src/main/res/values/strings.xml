@@ -356,4 +356,9 @@
     <string name="moe_layout_summary_full">Full bleed — image fills the card, poster style</string>
     <string name="moe_layout_side">Side</string>
     <string name="moe_layout_full">Full bleed</string>
+    <string name="moe_bg_title">Background image</string>
+    <string name="moe_bg_summary_none">Pick an image to use behind the whole UI</string>
+    <string name="moe_bg_summary_set">Applied — tap to choose another one</string>
+    <string name="moe_bg_reset">Reset background</string>
+    <string name="moe_bg_reset_summary">Back to plain color</string>
 </resources>
