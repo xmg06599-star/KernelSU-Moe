@@ -1,6 +1,8 @@
 package me.weishu.kernelsu.ui.component.material
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.MaterialTheme
@@ -12,6 +14,7 @@ import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import me.weishu.kernelsu.ui.component.moe.MoePageBackground
 
 @Composable
 fun ExpressiveScaffold(
@@ -36,7 +39,11 @@ fun ExpressiveScaffold(
         containerColor = containerColor,
         contentColor = contentColor,
         contentWindowInsets = contentWindowInsets,
-        content = content,
+        content = { padding ->
+            MoePageBackground(modifier = Modifier.fillMaxSize()) {
+                content(padding)
+            }
+        },
     )
 }
 
