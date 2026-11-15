@@ -285,7 +285,7 @@ fun SegmentedItemContainer(
             blurRadius = 30f,
             colors = BlurColors(
                 blendColors = listOf(
-                    BlendColorEntry(color = colorScheme.surface.copy(alpha = 0.62f)),
+                    BlendColorEntry(color = colorScheme.surface.copy(alpha = 0.48f)),
                 ),
             ),
         )
@@ -294,7 +294,7 @@ fun SegmentedItemContainer(
     }
     Surface(
         modifier = modifier.fillMaxWidth().then(glassModifier),
-        color = if (moeBackdrop != null) Color.Transparent else colorScheme.surfaceBright,
+        color = if (moeBackdrop != null) Color.Transparent else colorScheme.surfaceBright.copy(alpha = 0.55f),
         contentColor = colorScheme.onSurface,
         shape = shapes.shape,
     ) {
