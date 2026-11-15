@@ -119,6 +119,7 @@ import me.weishu.kernelsu.ui.util.BlurredBar
 import me.weishu.kernelsu.ui.util.getFileName
 import me.weishu.kernelsu.ui.util.reboot
 import me.weishu.kernelsu.ui.util.rememberBlurBackdrop
+import me.weishu.kernelsu.ui.component.moe.MoePageBackground
 import top.yukonga.miuix.kmp.basic.ButtonDefaults
 import top.yukonga.miuix.kmp.basic.Card
 import top.yukonga.miuix.kmp.basic.DropdownImpl
