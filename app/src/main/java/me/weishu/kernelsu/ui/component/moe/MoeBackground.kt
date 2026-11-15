@@ -20,7 +20,8 @@ import androidx.compose.ui.layout.ContentScale
 /** 读 [MoeHeroStore.bgPath] 对应的背景图。 */
 @Composable
 fun rememberMoeBackgroundPainter(): Painter? {
-    val path = MoeHeroStore.bgPath
+    // 优先用「背景图」，没设就用「主页立绘」同一张——虚化后色调天然统一
+    val path = MoeHeroStore.bgPath.ifEmpty { MoeHeroStore.path }
     return remember(path) {
         if (path.isEmpty()) return@remember null
         runCatching {
@@ -48,12 +49,12 @@ fun MoePageBackground(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxSize()
-                    .blur(16.dp)
+                    .blur(14.dp)
             )
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(MoePalette.Scrim.copy(alpha = 0.30f))
+                    .background(Color.White.copy(alpha = 0.55f))
             )
         }
         content()
