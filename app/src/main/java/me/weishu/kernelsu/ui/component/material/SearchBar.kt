@@ -48,6 +48,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -179,7 +180,7 @@ fun SearchAppBar(
         }
     }
 
-    Surface(color = MaterialTheme.colorScheme.surfaceContainer) {
+    Surface(color = Color.Transparent) {
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {

@@ -713,6 +713,8 @@ private fun ModuleItem(
 
     TonalCard(
         modifier = Modifier.fillMaxWidth(),
+        containerColor = MaterialTheme.colorScheme.surfaceBright.copy(alpha = 0.55f),
+        contentColor = MaterialTheme.colorScheme.onSurface,
         interactionSource = cardInteractionSource,
         onClick = {
             if (canOpenWebUi) {
