@@ -53,7 +53,7 @@ fun MoePageBackground(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color.White.copy(alpha = 0.50f))
+                    .background(MoePalette.Scrim.copy(alpha = 0.30f))
             )
         }
         content()
