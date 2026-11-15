@@ -63,7 +63,7 @@ fun ExpressiveScaffold(
 
 @Composable
 fun expressiveTopAppBarColors(
-    containerColor: Color = MaterialTheme.colorScheme.surface.copy(alpha = 0.72f),
+    containerColor: Color = MaterialTheme.colorScheme.surface.copy(alpha = 0.38f),
     scrolledContainerColor: Color = containerColor,
 ): TopAppBarColors = TopAppBarDefaults.topAppBarColors(
     containerColor = containerColor,
