@@ -247,7 +247,7 @@ fun SettingPagerMiuix(
                                     )
                                 },
                                 selectedIndex = MoeHeroStore.layout,
-                                onSelectedIndexChange = { MoeHeroStore.setLayout(it) }
+                                onSelectedIndexChange = { MoeHeroStore.updateLayout(it) }
                             )
                         }
                     }

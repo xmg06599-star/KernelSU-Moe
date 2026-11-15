@@ -39,7 +39,7 @@ object MoeHeroStore {
         layout = repo.moeHeroLayout
     }
 
-    fun setLayout(value: Int) {
+    fun updateLayout(value: Int) {
         SettingsRepositoryImpl().moeHeroLayout = value
         layout = value
     }

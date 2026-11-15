@@ -213,7 +213,7 @@ fun SettingPagerMaterial(
                                     stringResource(id = R.string.moe_layout_full),
                                 ),
                                 selectedIndex = moeHeroLayout,
-                                onItemSelected = { MoeHeroStore.setLayout(it) }
+                                onItemSelected = { MoeHeroStore.updateLayout(it) }
                             )
                         }
                     }

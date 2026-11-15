@@ -343,7 +343,7 @@
     <string name="moe_title_working">Milady is working hard today too</string>
     <string name="moe_title_safe">Oops… fell into safe mode</string>
     <string name="moe_title_jailbreak">Shh — borrowing you a little privilege</string>
-    <string name="moe_hero_caption">Permissions are in your hands now… don't misuse them!</string>
+    <string name="moe_hero_caption">Permissions are in your hands now… don\'t misuse them!</string>
     <string name="moe_tag_bundled">Bundled LKM</string>
     <string name="moe_tag_custom">Custom LKM</string>
     <string name="moe_hero_title">Home artwork</string>
