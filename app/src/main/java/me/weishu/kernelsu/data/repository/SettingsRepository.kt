@@ -41,6 +41,18 @@ interface SettingsRepository {
     /** 全 App 背景图的绝对路径，空串表示未设置。 */
     var moeBgPath: String
 
+    /** 卡片不透明度 0.30~1.0 */
+    var moeCardAlpha: Float
+
+    /** 背景模糊半径（dp） */
+    var moeBgBlur: Float
+
+    /** 自定义主页台词，空串 = 用默认台词 */
+    var moeTitle: String
+
+    /** 自定义主页副标题，空串 = 用默认 */
+    var moeSubtitle: String
+
     suspend fun getSuCompatStatus(): String
     suspend fun getSuCompatPersistValue(): Long?
     fun isSuEnabled(): Boolean

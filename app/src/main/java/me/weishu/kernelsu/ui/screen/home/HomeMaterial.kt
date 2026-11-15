@@ -102,7 +102,7 @@ fun HomePagerMaterial(
         ) {
             MoeHeroCard(
                 title = moeTitleFor(state),
-                subtitle = stringResource(R.string.moe_hero_caption),
+                subtitle = MoeHeroStore.subtitle.ifEmpty { stringResource(R.string.moe_hero_caption) },
                 tags = listOfNotNull(
                     if (state.lkmMode == true) "LKM" else "GKI",
                     when {
@@ -637,9 +637,12 @@ private fun previewHomeScreenState(
 )
 
 @Composable
-private fun moeTitleFor(state: HomeUiState): String = when {
+private fun moeTitleFor(state: HomeUiState): String {
+    if (MoeHeroStore.title.isNotEmpty()) return MoeHeroStore.title
+    return when {
     state.ksuVersion == null -> stringResource(R.string.moe_title_idle)
     state.isSafeMode -> stringResource(R.string.moe_title_safe)
     state.isLateLoadMode -> stringResource(R.string.moe_title_jailbreak)
     else -> stringResource(R.string.moe_title_working)
+    }
 }

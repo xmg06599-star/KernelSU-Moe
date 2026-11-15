@@ -49,7 +49,7 @@ fun MoePageBackground(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxSize()
-                    .blur(14.dp)
+                    .then(if (MoeHeroStore.bgBlur > 0f) Modifier.blur(MoeHeroStore.bgBlur.dp) else Modifier)
             )
             Box(
                 modifier = Modifier

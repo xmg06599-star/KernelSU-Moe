@@ -37,11 +37,43 @@ object MoeHeroStore {
     var layout by mutableStateOf(0)
         private set
 
+    /** 卡片不透明度 */
+    var cardAlpha by mutableStateOf(0.55f)
+        private set
+
+    /** 背景模糊（dp） */
+    var bgBlur by mutableStateOf(14f)
+        private set
+
+    /** 自定义主页标题（空 = 默认台词） */
+    var title by mutableStateOf("")
+        private set
+
+    /** 自定义主页副标题 */
+    var subtitle by mutableStateOf("")
+        private set
+
     fun refresh() {
         val repo = SettingsRepositoryImpl()
         path = repo.moeHeroPath
         bgPath = repo.moeBgPath
         layout = repo.moeHeroLayout
+        cardAlpha = repo.moeCardAlpha
+        bgBlur = repo.moeBgBlur
+        title = repo.moeTitle
+        subtitle = repo.moeSubtitle
+    }
+
+    fun updateAppearance(title: String, subtitle: String, cardAlpha: Float, bgBlur: Float) {
+        val repo = SettingsRepositoryImpl()
+        repo.moeTitle = title
+        repo.moeSubtitle = subtitle
+        repo.moeCardAlpha = cardAlpha
+        repo.moeBgBlur = bgBlur
+        this.title = title
+        this.subtitle = subtitle
+        this.cardAlpha = cardAlpha
+        this.bgBlur = bgBlur
     }
 
     fun updateLayout(value: Int) {

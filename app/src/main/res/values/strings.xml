@@ -361,4 +361,6 @@
     <string name="moe_bg_summary_set">Applied — tap to choose another one</string>
     <string name="moe_bg_reset">Reset background</string>
     <string name="moe_bg_reset_summary">Back to plain color</string>
+    <string name="moe_appearance_title">Dress me up</string>
+    <string name="moe_appearance_summary">Edit home text, card opacity and backdrop blur</string>
 </resources>

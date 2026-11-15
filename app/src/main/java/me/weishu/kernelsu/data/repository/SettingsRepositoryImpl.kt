@@ -74,6 +74,22 @@ class SettingsRepositoryImpl : SettingsRepository {
         get() = prefs.getString("moe_bg_path", "") ?: ""
         set(value) = prefs.edit { putString("moe_bg_path", value) }
 
+    override var moeCardAlpha: Float
+        get() = prefs.getFloat("moe_card_alpha", 0.55f)
+        set(value) = prefs.edit { putFloat("moe_card_alpha", value) }
+
+    override var moeBgBlur: Float
+        get() = prefs.getFloat("moe_bg_blur", 14f)
+        set(value) = prefs.edit { putFloat("moe_bg_blur", value) }
+
+    override var moeTitle: String
+        get() = prefs.getString("moe_title", "") ?: ""
+        set(value) = prefs.edit { putString("moe_title", value) }
+
+    override var moeSubtitle: String
+        get() = prefs.getString("moe_subtitle", "") ?: ""
+        set(value) = prefs.edit { putString("moe_subtitle", value) }
+
     override var colorStyle: String
         get() = prefs.getString("color_style", PaletteStyle.TonalSpot.name) ?: PaletteStyle.TonalSpot.name
         set(value) = prefs.edit { putString("color_style", value) }

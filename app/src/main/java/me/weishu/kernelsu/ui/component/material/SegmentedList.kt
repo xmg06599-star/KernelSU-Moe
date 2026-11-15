@@ -34,6 +34,7 @@ import androidx.compose.material3.SegmentedListItem
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import me.weishu.kernelsu.ui.component.moe.MoeHeroStore
 import top.yukonga.miuix.kmp.blur.textureBlur
 import top.yukonga.miuix.kmp.blur.BlurColors
 import top.yukonga.miuix.kmp.blur.BlendColorEntry
@@ -87,8 +88,8 @@ annotation class SegmentedColumnDsl
 
 @Composable
 private fun defaultSegmentedColors(): ListItemColors = ListItemDefaults.segmentedColors(
-    containerColor = colorScheme.surfaceBright.copy(alpha = 0.55f),
-    disabledContainerColor = colorScheme.surfaceBright.copy(alpha = 0.55f),
+    containerColor = colorScheme.surfaceBright.copy(alpha = MoeHeroStore.cardAlpha),
+    disabledContainerColor = colorScheme.surfaceBright.copy(alpha = MoeHeroStore.cardAlpha),
     supportingContentColor = colorScheme.onSurfaceVariant
 )
 

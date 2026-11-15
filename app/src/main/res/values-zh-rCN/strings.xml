@@ -355,4 +355,6 @@
     <string name="moe_bg_summary_set">已经铺好啦，点一下换一张</string>
     <string name="moe_bg_reset">恢复默认背景</string>
     <string name="moe_bg_reset_summary">回到纯色背景</string>
+    <string name="moe_appearance_title">打扮本小姐</string>
+    <string name="moe_appearance_summary">改主页台词、卡片不透明度、背景模糊</string>
 </resources>

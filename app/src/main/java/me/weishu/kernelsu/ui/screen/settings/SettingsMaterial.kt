@@ -45,6 +45,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import kotlinx.coroutines.launch
+import me.weishu.kernelsu.ui.component.moe.MoeAppearanceDialog
 import me.weishu.kernelsu.ui.component.moe.MoeHeroStore
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -104,11 +105,14 @@ fun SettingPagerMaterial(
     val moeHeroReady = MoeHeroStore.path.isNotEmpty()
     val moeHeroLayout = MoeHeroStore.layout
     val moeBgReady = MoeHeroStore.bgPath.isNotEmpty()
+    var showMoeDialog by remember { mutableStateOf(false) }
 
     UninstallDialog(
         show = showUninstallDialog.value,
         onDismissRequest = { showUninstallDialog.value = false }
     )
+
+    MoeAppearanceDialog(show = showMoeDialog, onDismiss = { showMoeDialog = false })
 
     ExpressiveScaffold(
         topBar = {
@@ -168,6 +172,20 @@ fun SettingPagerMaterial(
                             headlineContent = { Text(stringResource(id = R.string.settings_theme)) },
                             supportingContent = { Text(stringResource(id = R.string.settings_theme_summary)) },
                             leadingContent = { Icon(Icons.Filled.Palette, stringResource(id = R.string.settings_theme)) },
+                            trailingContent = {
+                                Icon(
+                                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                                    null
+                                )
+                            }
+                        )
+                    }
+                    add {
+                        SegmentedListItem(
+                            onClick = { showMoeDialog = true },
+                            headlineContent = { Text(stringResource(id = R.string.moe_appearance_title)) },
+                            supportingContent = { Text(stringResource(id = R.string.moe_appearance_summary)) },
+                            leadingContent = { Icon(Icons.Filled.Palette, stringResource(id = R.string.moe_appearance_title)) },
                             trailingContent = {
                                 Icon(
                                     Icons.AutoMirrored.Filled.KeyboardArrowRight,
