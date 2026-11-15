@@ -29,10 +29,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import me.weishu.kernelsu.Natives
 import me.weishu.kernelsu.R
 import me.weishu.kernelsu.ui.LocalMainPagerState
+import me.weishu.kernelsu.ui.util.ksuUiUnlocked
 
 @Composable
 fun BottomBarMaterial(navigationBadge: NavigationBadgeState) {
-    val fullFeatured = Natives.isFullFeatured()
+    val fullFeatured = ksuUiUnlocked()
     if (!fullFeatured) return
 
     val mainPagerState = LocalMainPagerState.current

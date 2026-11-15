@@ -559,6 +559,15 @@ fun rootAvailable(): Boolean {
     return shell.isRoot
 }
 
+/**
+ * UI 是否解锁完整导航。
+ *
+ * 官方 [Natives.isFullFeatured] 要求内核把本 APK 认作「管理器」，而内核只校验 APK 的 v2 签名，
+ * 自签名的管理器在第三方内核（SukiSU 等）上永远不满足这个条件。
+ * 这里放宽为「是官方管理器，或者至少能拿到 root」，让底栏与页面切换可用。
+ */
+fun ksuUiUnlocked(): Boolean = Natives.isFullFeatured() || rootAvailable()
+
 suspend fun getCurrentKmi(): String = withContext(Dispatchers.IO) {
     val shell = getRootShell()
     val cmd = "boot-info current-kmi"
