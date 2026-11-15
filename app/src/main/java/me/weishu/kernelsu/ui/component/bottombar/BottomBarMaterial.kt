@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.asPaddingValues
@@ -59,8 +60,9 @@ fun BottomBarMaterial(navigationBadge: NavigationBadgeState) {
     Box(
         modifier = Modifier
             .padding(start = 20.dp, end = 20.dp, bottom = navBottomInset + 10.dp)
+            .shadow(10.dp, RoundedCornerShape(28.dp), clip = false)
             .clip(RoundedCornerShape(28.dp))
-            .background(MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.82f))
+            .background(MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.96f))
     ) {
         ShortNavigationBar(
             containerColor = Color.Transparent,
