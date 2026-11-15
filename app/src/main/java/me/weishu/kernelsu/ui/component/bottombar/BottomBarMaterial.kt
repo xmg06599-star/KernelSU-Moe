@@ -34,6 +34,10 @@ import androidx.compose.material3.ShortNavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import top.yukonga.miuix.kmp.blur.textureBlur
+import top.yukonga.miuix.kmp.blur.BlurColors
+import top.yukonga.miuix.kmp.blur.BlendColorEntry
+import top.yukonga.miuix.kmp.blur.Backdrop
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -43,7 +47,7 @@ import me.weishu.kernelsu.ui.LocalMainPagerState
 import me.weishu.kernelsu.ui.util.ksuUiUnlocked
 
 @Composable
-fun BottomBarMaterial(navigationBadge: NavigationBadgeState) {
+fun BottomBarMaterial(navigationBadge: NavigationBadgeState, backdrop: Backdrop) {
     val fullFeatured = ksuUiUnlocked()
     if (!fullFeatured) return
 
@@ -57,12 +61,23 @@ fun BottomBarMaterial(navigationBadge: NavigationBadgeState) {
     )
 
     val navBottomInset = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+    val barShape = RoundedCornerShape(28.dp)
     Box(
         modifier = Modifier
             .padding(start = 20.dp, end = 20.dp, bottom = navBottomInset + 10.dp)
-            .shadow(10.dp, RoundedCornerShape(28.dp), clip = false)
-            .clip(RoundedCornerShape(28.dp))
-            .background(MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.96f))
+            .shadow(12.dp, barShape, clip = false)
+            .clip(barShape)
+            .textureBlur(
+                backdrop = backdrop,
+                shape = barShape,
+                blurRadius = 30f,
+                colors = BlurColors(
+                    blendColors = listOf(
+                        BlendColorEntry(color = MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.80f)),
+                    ),
+                ),
+            )
+            .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.10f))
     ) {
         ShortNavigationBar(
             containerColor = Color.Transparent,
