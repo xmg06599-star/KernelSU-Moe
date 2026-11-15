@@ -134,8 +134,8 @@ object MoeHeroStore {
             } ?: return null
 
             val longest = maxOf(decoded.width, decoded.height)
-            val scaled = if (longest > 1440) {
-                val ratio = 1440f / longest
+            val scaled = if (longest > 2560) {
+                val ratio = 2560f / longest
                 val w = (decoded.width * ratio).toInt().coerceAtLeast(1)
                 val h = (decoded.height * ratio).toInt().coerceAtLeast(1)
                 Bitmap.createScaledBitmap(decoded, w, h, true).also { decoded.recycle() }
@@ -163,7 +163,7 @@ fun rememberMoeHeroPainter(): Painter? {
     return remember(path) {
         if (path.isEmpty()) return@remember null
         runCatching {
-            val options = BitmapFactory.Options().apply { inSampleSize = 2 }
+            val options = BitmapFactory.Options().apply { inSampleSize = 1 }
             BitmapFactory.decodeFile(path, options)?.let { BitmapPainter(it.asImageBitmap()) }
         }.getOrNull()
     }

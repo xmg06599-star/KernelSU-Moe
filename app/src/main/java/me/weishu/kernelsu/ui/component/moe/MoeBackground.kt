@@ -25,7 +25,7 @@ fun rememberMoeBackgroundPainter(): Painter? {
     return remember(path) {
         if (path.isEmpty()) return@remember null
         runCatching {
-            val options = BitmapFactory.Options().apply { inSampleSize = 2 }
+            val options = BitmapFactory.Options().apply { inSampleSize = 1 }
             BitmapFactory.decodeFile(path, options)?.let { BitmapPainter(it.asImageBitmap()) }
         }.getOrNull()
     }
