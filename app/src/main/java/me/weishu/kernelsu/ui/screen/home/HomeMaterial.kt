@@ -231,6 +231,7 @@ private fun StatusCard(
             MaterialTheme.colorScheme.errorContainer
         }
         val contentColor = MaterialTheme.colorScheme.contentColorFor(containerColor)
+        val glassColor = containerColor.copy(alpha = 0.55f)
 
         val statusIcon = when {
             ksuActive -> Icons.Rounded.CheckCircle
@@ -279,7 +280,7 @@ private fun StatusCard(
 
         Surface(
             modifier = Modifier.fillMaxWidth(),
-            color = containerColor,
+            color = glassColor,
             contentColor = contentColor,
             shape = MaterialTheme.shapes.large,
             onClick = {
@@ -360,6 +361,8 @@ private fun WarningCard(
         WarningLevel.Error -> MaterialTheme.colorScheme.errorContainer
         WarningLevel.Notice -> MaterialTheme.colorScheme.tertiaryContainer
     }
+    val contentColor = MaterialTheme.colorScheme.contentColorFor(containerColor)
+    val glassColor = containerColor.copy(alpha = 0.55f)
     val content = @Composable {
         Row(
             modifier = Modifier
@@ -369,14 +372,14 @@ private fun WarningCard(
             Text(
                 text = message,
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.contentColorFor(containerColor)
+                color = contentColor
             )
         }
     }
     if (onClick != null) {
-        TonalCard(containerColor = containerColor, onClick = onClick, content = content)
+        TonalCard(containerColor = glassColor, contentColor = contentColor, onClick = onClick, content = content)
     } else {
-        TonalCard(containerColor = containerColor, content = content)
+        TonalCard(containerColor = glassColor, contentColor = contentColor, content = content)
     }
 }
 
