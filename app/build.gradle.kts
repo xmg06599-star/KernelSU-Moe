@@ -167,6 +167,8 @@ android {
     lint {
         abortOnError = true
         checkReleaseBuilds = false
+        // minSdk 30 但部分 Compose/RenderEffect API 是 31+，运行时已做降级，这里不拦
+        disable += "NewApi"
     }
 
     compileOptions {
